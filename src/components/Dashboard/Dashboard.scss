@@ -27,6 +27,11 @@
     }
 }
 
+.containerOrder {
+    display: flex;
+    flex-direction: column;
+}
+
 @media only screen and (max-width: 980px) {
     .activeShow {
         .activeDetailsContainer{

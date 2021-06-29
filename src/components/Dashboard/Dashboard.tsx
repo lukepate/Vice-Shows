@@ -49,15 +49,17 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
     return (
         <div className={styles.container}>
             <Nav></Nav>
-            <Slider currentShows={currentShows} updateActiveShow={updateActiveShow} activeShow={activeShowState} />
-            <div className={styles.activeShow}>
-                <img className={styles.activeImage} src={`https://viceimages.s3.amazonaws.com/${activeShowState.product_image_url}`} />
+            <div className={styles.containerOrder}>
+                <Slider currentShows={currentShows} updateActiveShow={updateActiveShow} activeShow={activeShowState} />
+                <div className={styles.activeShow}>
+                    <img className={styles.activeImage} src={`https://viceimages.s3.amazonaws.com/${activeShowState.product_image_url}`} />
 
 
-                <span className={styles.activeDetailsContainer}>
-                     <p className={styles.episodesText}>{activeShowState.episodes} Episodes</p>
-                    <h1 className={styles.titleText}>{activeShowState.title}</h1>
-                </span>
+                    <span className={styles.activeDetailsContainer}>
+                        <p className={styles.episodesText}>{activeShowState.episodes} Episodes</p>
+                        <h1 className={styles.titleText}>{activeShowState.title}</h1>
+                    </span>
+                </div>
             </div>
         </div>
     )
