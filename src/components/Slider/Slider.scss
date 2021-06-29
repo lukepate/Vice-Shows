@@ -29,7 +29,7 @@
 
         .active {
             border: solid 2px $tretiary;
-            width: 108px;
+            width: 110px;
         }
 
         .showStyle {
@@ -56,10 +56,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-content: flex-end;
-        flex-flow: row wrap;
+        overflow: scroll hidden;
 
        .show {
            flex-direction: column-reverse;

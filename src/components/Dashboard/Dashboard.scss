@@ -7,8 +7,15 @@
     padding-top: 40px;
     
     .activeImage {
-        width: 240px;       
+        width: 240px;      
     }
+}
+
+.activeTextContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0px;
 
     .activeDetailsContainer {
         display: flex;
@@ -43,6 +50,12 @@
             }
         }
     }
+        
+    .activeImage {
+        width: 200px;
+        transform: translateX(0px) translateZ(0px)!important;
+    }
+
 }
 
 

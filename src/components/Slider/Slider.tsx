@@ -5,49 +5,42 @@ import styles from './Slider.scss';
 
 interface SliderProps {
     currentShows: Show[];
-    activeShow: Show;
-    updateActiveShow: (id: string) => void;
+    currentIndex: number;
 }
 
-const Slider: React.FC<SliderProps> = ({ currentShows, updateActiveShow, activeShow }) => {
-    const foundShowIndex = currentShows.findIndex((show: { id: string | null; }) => show === activeShow);
-    const [currentIndex, setCurrentIndex] = useState(foundShowIndex);
-    
-    const cardClickHandler = (index: number) => {
-        if (currentIndex === index ) return;
+const Slider: React.FC<SliderProps> = ({ currentShows, currentIndex }) => {
 
-        // prev
-        if (currentIndex > index && index >= 0) {
-            setCurrentIndex(currentIndex - (currentIndex - index));
-            updateActiveShow(currentShows[index].id);
-            return;
-        }  
-        
-        // // next
-        if (currentIndex < index && index <= currentShows.length) {
-            setCurrentIndex(currentIndex + (index - currentIndex));
-            updateActiveShow(currentShows[index].id);
-            return;
-        }  
-    }
+    const activeShow = (index: number, show: Show) => {
+        return (
+             <div>
+                <img key={index} className={styles.active} src={`https://viceimages.s3.amazonaws.com/${show.product_image_url}`} />
+            </div>
+        )
+    };
 
-    useEffect(() => {
-        const foundShow = currentShows.findIndex((show: { id: string | null; }) => show === activeShow);
-        setCurrentIndex(foundShow);
-    }, [activeShow]);
+    const showImage = (index: number, show: Show) => {
+        return (
+            <div>
+                <img key={index} className={styles.showStyle} src={`https://viceimages.s3.amazonaws.com/${show.product_image_url}`} />
+            </div>
+        )
+    };
 
     return (
         <div className={styles.showContainer}>
             <div data-testid='slider' className={styles.sliderContainer}>
                 {currentShows.map((show: Show, index: number) => {
                     return (
-                        <Link className={styles.link} key={show.id} to={`/?id=${show.id}`} onClick={() => cardClickHandler(--index)} >                            
+                        <Link className={styles.link} key={show.id} to={`/?id=${show.id}`} >                            
                             <div className={styles.show}>
-                                    <div>
-                                    <img key={index} className={currentIndex !== index ? styles.showStyle : styles.active } src={`https://viceimages.s3.amazonaws.com/${show.product_image_url}`} />
-                                    </div>
-
+                                    {currentIndex === index ? 
+                                        activeShow(index, show) :
+                                        showImage(index, show) 
+                                    }
+                                  
                                     <div className={styles.showIndex}>{++index}</div>
+
+                 
                             </div>
                         </Link>
                     );
