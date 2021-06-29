@@ -1,25 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Show, Action } from '../../types/show';
 import { useHistory } from "react-router-dom";
-import Slider from '../slider/slider'; 
-import Nav from '../nav/nav'; 
-import styles from './dashboard.scss';
+import Slider from '../Slider/Slider'; 
+import Nav from '../Nav/Nav'; 
+import styles from './Dashboard.scss';
 
 interface DashboardProp {
     currentShows: [Show]
 }
 
 const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
-
     const history = useHistory();
-    const initShowState:Show = {
-        id: currentShows[0].id, 
-        title: currentShows[0].title, 
-        episodes: currentShows[0].episodes, 
-        product_image_url: currentShows[0].product_image_url
-    };
-
-    const [activeShowState, setActiveCardState] = useState(initShowState);
+    const [activeShowState, setActiveCardState] = useState(currentShows[0]);
 
     const updateActiveShow = (id: string) => {
         const foundShow = currentShows.find((x) => x.id === id);
@@ -47,7 +39,7 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
     }, []);
 
     return (
-        <div className={styles.container}>
+        <div data-testid='dashboard' className={styles.container}>
             <Nav></Nav>
             <div className={styles.containerOrder}>
                 <Slider currentShows={currentShows} updateActiveShow={updateActiveShow} activeShow={activeShowState} />

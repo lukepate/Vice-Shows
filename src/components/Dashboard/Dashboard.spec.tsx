@@ -1,16 +1,16 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Slider from './Slider';
+import Dashboard from './Dashboard';
 import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
 import { showsData } from '../../types/showData';
 
-test('The Slider renders', async () => {
+test('The Dashboard renders', async () => {
     const history = createMemoryHistory()
    render(
         <Router history={history}>
-            <Slider currentShows={showsData} updateActiveShow={jest.fn()} />
+            <Dashboard currentShows={showsData} />
         </Router>
     );
-    screen.getByTestId('slider');
+    screen.getByTestId('dashboard');
 });

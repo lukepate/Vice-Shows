@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Show } from '../../types/show';
 import { Link } from "react-router-dom";
-import styles from './slider.scss';
+import styles from './Slider.scss';
 
 interface SliderProps {
     currentShows: Show[];
