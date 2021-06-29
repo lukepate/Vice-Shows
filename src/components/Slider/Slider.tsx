@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Show } from '../../types/Show';
+import { Show } from '../../types/show';
 import { Link } from "react-router-dom";
-import styles from './Slider.scss';
+import styles from './slider.scss';
 
 interface SliderProps {
     currentShows: Show[];
@@ -34,11 +34,6 @@ const Slider: React.FC<SliderProps> = ({ currentShows, updateActiveShow, activeS
         setCurrentIndex(foundShow);
     }, [activeShow]);
 
-    const imgHelper = (file: string) => {
-        return `./${file.split('.')[0]}`;
-    }
-
-
     return (
         <div className={styles.showContainer}>
             <div data-testid='slider' className={styles.sliderContainer}>
@@ -50,7 +45,7 @@ const Slider: React.FC<SliderProps> = ({ currentShows, updateActiveShow, activeS
                                     <img key={index} className={currentIndex !== index ? styles.showStyle : styles.active } src={`https://viceimages.s3.amazonaws.com/${show.product_image_url}`} />
                                     </div>
 
-                                    <div className={styles.showIndex}> {index + 1}</div>
+                                    <div className={styles.showIndex}>{++index}</div>
                             </div>
                         </Link>
                     );

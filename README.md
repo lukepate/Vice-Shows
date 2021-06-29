@@ -9,3 +9,4 @@ todo
     - clean files
     - clean package.json commands
     - combine start up commands 
+    - add loader / error in app.tsx

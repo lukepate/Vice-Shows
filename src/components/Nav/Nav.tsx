@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Nav.scss';
+import styles from './nav.scss';
 
 const Nav: React.FC = () => {
     return (

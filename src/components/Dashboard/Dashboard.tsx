@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
-// import { Show } from '../../store/types/Show';
+import { Show, Action } from '../../types/show';
 import { useHistory } from "react-router-dom";
-import Slider from '../Slider/Slider'; 
-import Nav from '../Nav/Nav'; 
-import styles from './Dashboard.scss';
+import Slider from '../slider/slider'; 
+import Nav from '../nav/nav'; 
+import styles from './dashboard.scss';
 
 interface DashboardProp {
-    currentShows: any
+    currentShows: [Show]
 }
 
 const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
 
     const history = useHistory();
-    const initShowState = {
+    const initShowState:Show = {
         id: currentShows[0].id, 
         title: currentShows[0].title, 
         episodes: currentShows[0].episodes, 
@@ -22,7 +22,7 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
     const [activeShowState, setActiveCardState] = useState(initShowState);
 
     const updateActiveShow = (id: string) => {
-        const foundShow = currentShows.find((x:any) => x.id === id);
+        const foundShow = currentShows.find((x) => x.id === id);
         if (foundShow) setActiveCardState(foundShow);
     };
 
@@ -37,10 +37,10 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
     }, []);
 
     useEffect(() => {
-        history.listen((action: any) => {
-            console.log(action)
+        history.listen((_location, action) => {
             const urlParams = new URLSearchParams(window.location.search).get('id');
             const foundShow = currentShows.find((show: { id: string | null; }) => show.id === urlParams);
+
             if (foundShow) updateActiveShow(foundShow.id);
             if (action === 'POP' && foundShow) updateActiveShow(foundShow.id);
         });
