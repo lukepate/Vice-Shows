@@ -12,20 +12,22 @@ interface SliderProps {
 const Slider: React.FC<SliderProps> = ({ currentShows, updateActiveShow, activeShow }) => {
     const foundShowIndex = currentShows.findIndex((show: { id: string | null; }) => show === activeShow);
     const [currentIndex, setCurrentIndex] = useState(foundShowIndex);
- 
+    
     const cardClickHandler = (index: number) => {
-        updateActiveShow(currentShows[index].id);
+        if (currentIndex === index ) return;
 
         // prev
         if (currentIndex > index && index >= 0) {
             setCurrentIndex(currentIndex - (currentIndex - index));
             updateActiveShow(currentShows[index].id);
+            return;
         }  
         
         // // next
         if (currentIndex < index && index <= currentShows.length) {
             setCurrentIndex(currentIndex + (index - currentIndex));
             updateActiveShow(currentShows[index].id);
+            return;
         }  
     }
 
@@ -39,7 +41,7 @@ const Slider: React.FC<SliderProps> = ({ currentShows, updateActiveShow, activeS
             <div data-testid='slider' className={styles.sliderContainer}>
                 {currentShows.map((show: Show, index: number) => {
                     return (
-                        <Link className={styles.link} key={show.id} to={`/?id=${show.id}`} onClick={() => cardClickHandler(index)} >                            
+                        <Link className={styles.link} key={show.id} to={`/?id=${show.id}`} onClick={() => cardClickHandler(--index)} >                            
                             <div className={styles.show}>
                                     <div>
                                     <img key={index} className={currentIndex !== index ? styles.showStyle : styles.active } src={`https://viceimages.s3.amazonaws.com/${show.product_image_url}`} />

@@ -7,7 +7,7 @@
     "license": "MIT",
     "scripts": {
         "start-api": "json-server --watch shows.json",
-        "start-dev": "webpack-dev-server --mode development --open --hot --port 8080",
+        "start-dev": "npm run start-api & webpack-dev-server --mode development --open --hot --port 8080",
         "start": "webpack-dev-server --mode production --open --hot --port 8080",
         "build": "webpack --mode production",
         "test": "jest --config ./jest.config.js",
