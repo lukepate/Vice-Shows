@@ -1,0 +1,11 @@
+todo
+    - test
+    - deploy
+    - readme
+    - gitignore
+    - put in repo 
+    - fix styling 
+    - add accesiablity 
+    - clean files
+    - clean package.json commands
+    - combine start up commands 

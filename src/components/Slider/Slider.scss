@@ -1,0 +1,71 @@
+@import '../Styles/_colors.scss'; 
+
+.showContainer {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+
+    .sliderContainer {
+        display: flex;
+        flex-direction: row;
+        margin-left: 0;
+
+        .link {
+            text-decoration: none;
+        }
+    }
+
+    .show {
+        padding: 4px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            color: $tretiary;
+        }
+
+        .active {
+            border: solid 2px $tretiary;
+            width: 108px;
+        }
+
+        .showStyle {
+            width: 100px;
+        }
+
+        .showIndex {
+            color: $light;
+            background-color: $secondary;
+            display: flex;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 24px;   
+        }
+    }
+}
+
+@media only screen and (max-width: 980px) {
+   .sliderContainer {
+        padding-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: flex-end;
+        flex-flow: row wrap;
+
+       .show {
+           flex-direction: column-reverse;
+            .showIndex {
+                display: none;
+            }
+        }
+    }
+}
