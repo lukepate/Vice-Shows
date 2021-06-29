@@ -9,23 +9,6 @@ interface SliderProps {
 }
 
 const Slider: React.FC<SliderProps> = ({ currentShows, currentIndex }) => {
-
-    const activeShow = (index: number, show: Show) => {
-        return (
-             <div>
-                <img key={index} className={styles.active} src={`https://viceimages.s3.amazonaws.com/${show.product_image_url}`} />
-            </div>
-        )
-    };
-
-    const showImage = (index: number, show: Show) => {
-        return (
-            <div>
-                <img key={index} className={styles.showStyle} src={`https://viceimages.s3.amazonaws.com/${show.product_image_url}`} />
-            </div>
-        )
-    };
-
     return (
         <div className={styles.showContainer}>
             <div data-testid='slider' className={styles.sliderContainer}>
@@ -33,14 +16,9 @@ const Slider: React.FC<SliderProps> = ({ currentShows, currentIndex }) => {
                     return (
                         <Link className={styles.link} key={show.id} to={`/?id=${show.id}`} >                            
                             <div className={styles.show}>
-                                    {currentIndex === index ? 
-                                        activeShow(index, show) :
-                                        showImage(index, show) 
-                                    }
-                                  
-                                    <div className={styles.showIndex}>{++index}</div>
+                                    <img key={index} className={currentIndex === index ? styles.active : styles.showStyle} src={`https://viceimages.s3.amazonaws.com/${show.product_image_url}`} />
 
-                 
+                                    <div className={styles.showIndex}>{++index}</div>
                             </div>
                         </Link>
                     );
