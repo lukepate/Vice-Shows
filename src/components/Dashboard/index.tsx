@@ -13,18 +13,20 @@ interface DashboardProp {
 const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
     const history = useHistory();
     const [activeShowState, setActiveCardState] = useState(currentShows[0]);
+    const [fadeDirection, setFadeDirection] = useState(true);
+
     const foundShowIndex = currentShows.findIndex((show: Show) => show === activeShowState);
     const [currentIndex, setCurrentIndex] = useState(foundShowIndex);
 
     const updateActiveShow = (id: string) => {
         const foundShow = currentShows.find((x) => x.id === id);
+  
         if (foundShow) setActiveCardState(foundShow);
     };
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search).get('id');
-        const foundShow = currentShows.find((x: { id: string | null; }) => x.id === urlParams);
-            
+        const foundShow = currentShows.find((x: Show) => x.id === urlParams);
         if (foundShow) {
             updateActiveShow(foundShow.id); 
             setActiveCardState(foundShow);
@@ -32,19 +34,25 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
 
         history.listen((_location, action) => {
             const urlParams = new URLSearchParams(window.location.search).get('id');
-            const foundShow = currentShows.find((show: { id: string | null; }) => show.id === urlParams);
+            const foundShow = currentShows.find((show: Show) => show.id === urlParams);
 
             if (foundShow) updateActiveShow(foundShow.id);
             if (action === 'POP' && foundShow) updateActiveShow(foundShow.id);
         });
     }, []);
 
-    // matches active image in slider
+    // matches active image to active image in slider
     useEffect(() => {
         const foundShow = currentShows.findIndex((show: Show) => show === activeShowState);
+        
+        foundShow >= currentIndex ? setFadeDirection(false) : setFadeDirection(true);
+        console.log(foundShow, currentIndex, fadeDirection);
+
         setCurrentIndex(foundShow);
     }, [activeShowState]);
 
+    const left = { opacity: 0, x: -400};
+    const right = { opacity: 0, x: 400};
 
     return (
         <div data-testid='dashboard' className={styles.container}>
@@ -58,7 +66,7 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
                             className={styles.activeImage} 
                             key={`https://viceimages.s3.amazonaws.com/${activeShowState.product_image_url}`}
                             src={`https://viceimages.s3.amazonaws.com/${activeShowState.product_image_url}`}
-                            initial={{ opacity: 0, x: 400}}
+                            initial={ fadeDirection === true ? left : right }
                             animate={{ opacity: 1,  x: 0}}
                             exit={{opacity: 0, display: "none"}}
                         />
