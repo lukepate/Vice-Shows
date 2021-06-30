@@ -1,11 +1,10 @@
 @import '_colors.scss';  
 
-html, body {
+body {
     height: 100%;
     margin: 0;
     padding: 0;
     max-width: 100%;
-    overflow-x: hidden;
     background-color: $primary; 
     font-family: 'Roboto', sans-serif;
 }
@@ -15,6 +14,7 @@ html, body {
     flex-direction: column;
     align-items: center;
     color: $secondary;
+        overflow: hidden;
 }
 
 @media only screen and (max-width: 980px) {

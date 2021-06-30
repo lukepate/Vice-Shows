@@ -1,7 +1,7 @@
 import React from 'react';
-import Dashboard from './Dashboard/Dashboard'
+import Dashboard from './Dashboard'
 import useFetch from "react-fetch-hook";
-import styles from './Styles/App.scss';
+import styles from './styles/App.scss';
 import { Show } from '../types/show';
 
 

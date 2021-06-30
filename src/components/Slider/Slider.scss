@@ -1,15 +1,16 @@
 @import '../Styles/_colors.scss'; 
-
 .showContainer {
     width: 100%;
     overflow: hidden;
     display: flex;
     justify-content: center;
+    border-bottom: 1px #000 solid;
 
     .sliderContainer {
         display: flex;
         flex-direction: row;
         margin-left: 0;
+        padding-bottom: 10px;
 
         .link {
             text-decoration: none;
@@ -46,22 +47,75 @@
             width: 24px;
             height: 24px;
             border-radius: 24px;   
+            margin-top: 6px;
         }
     }
 }
 
 @media only screen and (max-width: 980px) {
-   .sliderContainer {
+    .showContainer{
+        border-top: 1px #000 solid;
+        border-bottom: 0;
         padding-top: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: scroll hidden;
+     }
 
-       .show {
-           flex-direction: column-reverse;
+    .sliderContainer {
+        width: 500px;
+        white-space: nowrap;
+        position: relative;
+        display: inline-block;
+        overflow: inherit;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        
+        .show {
+            flex-direction: column-reverse;
             .showIndex {
                 display: none;
+            }
+        }
+    }
+
+    .sliderContainer::-webkit-scrollbar {
+        background: transparent;
+        height: 6px;  
+    }
+
+    .sliderContainer::-webkit-scrollbar-thumb {
+        background-color: $grey;  
+        border-radius: 20px;       
+    }
+}
+
+@media only screen and (max-width: 540px) {
+    .showContainer{
+        padding-top: 0px;
+     }
+
+    .sliderContainer {
+        width: 300px;
+        white-space: nowrap;
+        position: relative;
+        display: inline-block;
+        overflow: inherit;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        padding-top: 10px;
+
+        .show {
+            flex-direction: column-reverse;
+
+            .showIndex {
+                display: none;
+            }
+            .active {
+                width: 70px;
+            }
+
+            .showStyle {
+                width: 60px;
             }
         }
     }

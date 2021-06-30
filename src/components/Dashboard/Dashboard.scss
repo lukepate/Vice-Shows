@@ -5,9 +5,11 @@
     flex-direction: column;
     align-items: center;
     padding-top: 40px;
+    height: 360px;   
     
     .activeImage {
-        width: 240px;      
+        width: auto;
+        height: 360px;     
     }
 }
 
@@ -35,26 +37,33 @@
 }
 
 .containerOrder {
+    width:100%;
     display: flex;
     flex-direction: column;
 }
 
 @media only screen and (max-width: 980px) {
     .activeShow {
+         height: 240px;
+         
+        .activeImage {
+            height: 240px;
+            transform: translateX(0px) translateZ(0px)!important;
+        }
+    }
+    .activeTextContainer {
         .activeDetailsContainer{
+            flex-direction: column-reverse;
             .titleText {
-                padding-bottom: 0px;
+                padding-bottom: 20px;
+                font-size: 20px;
             }
             .episodesText {
-                padding-bottom: 20px;
+                padding-bottom: 0px;
             }
         }
     }
-        
-    .activeImage {
-        width: 200px;
-        transform: translateX(0px) translateZ(0px)!important;
-    }
+
 
 }
 

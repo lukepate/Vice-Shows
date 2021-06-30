@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Show, Action } from '../../types/show';
 import { useHistory } from "react-router-dom";
-import Slider from '../Slider/Slider'; 
-import Nav from '../Nav/Nav'; 
+import Slider from '../Slider'; 
+import Nav from '../Nav'; 
 import styles from './Dashboard.scss';
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -57,7 +57,7 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
             <Nav></Nav>
             <div className={styles.containerOrder}>
                 <Slider currentIndex={currentIndex} currentShows={currentShows} />
-   
+
                 <div className={styles.activeShow}>
                     <AnimatePresence>
                         <motion.img
