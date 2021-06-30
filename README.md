@@ -28,8 +28,3 @@ Please make sure to update tests as appropriate.
 [MIT](https://choosealicense.com/licenses/mit/)
 
 
-    - test
-    - fix styling 
-    - add accesiablity 
-    - clean files
-    - add loader / error in app.tsx

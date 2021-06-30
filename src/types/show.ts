@@ -4,9 +4,3 @@ export interface Show {
     episodes: number;
     product_image_url: string;
 }
-
-export enum Action {
-    PUSH ='PUSH',
-    POP = 'POP',
-    REPLACE = 'REPLACE'
-}

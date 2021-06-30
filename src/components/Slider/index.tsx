@@ -9,7 +9,6 @@ interface SliderProps {
 }
 
 const Slider: React.FC<SliderProps> = ({ currentShows, currentIndex }) => {
-    console.log(currentShows, currentIndex)
     return (
         <div className={styles.showContainer}>
             <div data-testid='slider' className={styles.sliderContainer}>

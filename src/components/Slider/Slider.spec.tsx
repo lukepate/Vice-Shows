@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Slider from './Slider';
+import Slider from './index';
 import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
-import { showsData } from '../../types/showData';
+import { showsData } from '../../mockData';
 
 test('The Slider renders', async () => {
     const history = createMemoryHistory()

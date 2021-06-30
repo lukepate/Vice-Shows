@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Show, Action } from '../../types/show';
+import { Show } from '../../types/show';
 import { useHistory } from "react-router-dom";
 import Slider from '../Slider'; 
 import Nav from '../Nav'; 
@@ -13,14 +13,8 @@ interface DashboardProp {
 const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
     const history = useHistory();
     const [activeShowState, setActiveCardState] = useState(currentShows[0]);
-
-
-
-    const foundShowIndex = currentShows.findIndex((show: { id: string | null; }) => show === activeShowState);
-
+    const foundShowIndex = currentShows.findIndex((show: Show) => show === activeShowState);
     const [currentIndex, setCurrentIndex] = useState(foundShowIndex);
-
-    const [fade, setFade] = useState(currentIndex >= 5 ? true : false);
 
     const updateActiveShow = (id: string) => {
         const foundShow = currentShows.find((x) => x.id === id);
@@ -47,7 +41,7 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
 
     // matches active image in slider
     useEffect(() => {
-        const foundShow = currentShows.findIndex((show: { id: string | null; }) => show === activeShowState);
+        const foundShow = currentShows.findIndex((show: Show) => show === activeShowState);
         setCurrentIndex(foundShow);
     }, [activeShowState]);
 
@@ -61,16 +55,14 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
                 <div className={styles.activeShow}>
                     <AnimatePresence>
                         <motion.img
-                        className={styles.activeImage} 
-                        key={`https://viceimages.s3.amazonaws.com/${activeShowState.product_image_url}`}
-                        src={`https://viceimages.s3.amazonaws.com/${activeShowState.product_image_url}`}
-                        initial={{ opacity: 0, y: 0}}
-                        animate={{ opacity: 1  }}
-                        exit={{opacity: 0, display: "none"}}
+                            className={styles.activeImage} 
+                            key={`https://viceimages.s3.amazonaws.com/${activeShowState.product_image_url}`}
+                            src={`https://viceimages.s3.amazonaws.com/${activeShowState.product_image_url}`}
+                            initial={{ opacity: 0, x: 400}}
+                            animate={{ opacity: 1,  x: 0}}
+                            exit={{opacity: 0, display: "none"}}
                         />
                     </AnimatePresence>
-
-
                 </div>
                 <div className={styles.activeTextContainer}>
                     <motion.div
@@ -79,10 +71,10 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
                         exit={{ opacity: 0, x:-400  }}
                         transition={{ ease: "easeOut" }}
                     >
-                        <span className={styles.activeDetailsContainer}>
+                        <div className={styles.activeDetailsContainer}>
                             <p className={styles.episodesText}>{activeShowState.episodes} Episodes</p>
                             <h1 className={styles.titleText}>{activeShowState.title}</h1>
-                        </span>
+                        </div>
                     </motion.div>
                 </div>
             </div>
