@@ -13,7 +13,7 @@ function App() {
     const { isLoading, error, data } = useFetch<[Show]>(url);
 
     if (isLoading) return <Loading />;
-    if (error) return <Error/>;
+    if (error) return <Error />;
 
     return (
         <div className={styles.container}>

@@ -20,13 +20,21 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
 
     const updateActiveShow = (id: string) => {
         const foundShow = currentShows.find((x) => x.id === id);
-  
         if (foundShow) setActiveCardState(foundShow);
     };
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search).get('id');
         const foundShow = currentShows.find((x: Show) => x.id === urlParams);
+
+        // removes false query params
+        if(!foundShow) {
+            const url = new URL(window.location.href)
+            const params = new URLSearchParams(url.search.slice(1))
+            params.delete('id')
+            window.history.replaceState({}, '', `${window.location.pathname}`)
+        };
+
         if (foundShow) {
             updateActiveShow(foundShow.id); 
             setActiveCardState(foundShow);
@@ -44,10 +52,8 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
     // matches active image to active image in slider
     useEffect(() => {
         const foundShow = currentShows.findIndex((show: Show) => show === activeShowState);
-        
         foundShow >= currentIndex ? setFadeDirection(false) : setFadeDirection(true);
-        console.log(foundShow, currentIndex, fadeDirection);
-
+        
         setCurrentIndex(foundShow);
     }, [activeShowState]);
 
@@ -56,7 +62,7 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
 
     return (
         <div data-testid='dashboard' className={styles.container}>
-            <Nav></Nav>
+            <Nav />
             <div className={styles.containerOrder}>
                 <Slider currentIndex={currentIndex} currentShows={currentShows} />
 
@@ -72,18 +78,12 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
                         />
                     </AnimatePresence>
                 </div>
+
                 <div className={styles.activeTextContainer}>
-                    <motion.div
-                        initial={{ opacity: 0, x:0 }}
-                        animate={{ opacity: 1, x:0}}
-                        exit={{ opacity: 0, x:-400  }}
-                        transition={{ ease: "easeOut" }}
-                    >
-                        <div className={styles.activeDetailsContainer}>
-                            <p className={styles.episodesText}>{activeShowState.episodes} Episodes</p>
-                            <h1 className={styles.titleText}>{activeShowState.title}</h1>
-                        </div>
-                    </motion.div>
+                    <div className={styles.activeDetailsContainer}>
+                        <p className={styles.episodesText}>{activeShowState.episodes} Episodes</p>
+                        <h1 className={styles.titleText}>{activeShowState.title}</h1>
+                    </div>
                 </div>
             </div>
         </div>
