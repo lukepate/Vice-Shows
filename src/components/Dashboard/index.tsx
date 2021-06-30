@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import Slider from '../Slider'; 
 import Nav from '../Nav'; 
 import styles from './Dashboard.scss';
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 
 interface DashboardProp {
     currentShows: [Show]
@@ -57,8 +57,7 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
         setCurrentIndex(foundShow);
     }, [activeShowState]);
 
-    const left = { opacity: 0, x: -400};
-    const right = { opacity: 0, x: 400};
+    
 
     return (
         <div data-testid='dashboard' className={styles.container}>
@@ -67,22 +66,23 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
                 <Slider currentIndex={currentIndex} currentShows={currentShows} />
 
                 <div className={styles.activeShow}>
-                    <AnimatePresence>
-                        <motion.img
-                            className={styles.activeImage} 
-                            key={`https://viceimages.s3.amazonaws.com/${activeShowState.product_image_url}`}
-                            src={`https://viceimages.s3.amazonaws.com/${activeShowState.product_image_url}`}
-                            initial={ fadeDirection === true ? left : right }
-                            animate={{ opacity: 1,  x: 0}}
-                            exit={{opacity: 0, display: "none"}}
-                        />
-                    </AnimatePresence>
+                    <motion.img
+                        className={styles.activeImage} 
+                        key={`https://viceimages.s3.amazonaws.com/${activeShowState.product_image_url}`}
+                        src={`https://viceimages.s3.amazonaws.com/${activeShowState.product_image_url}`}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 1 }}
+                    />
                 </div>
 
                 <div className={styles.activeTextContainer}>
-                    <div className={styles.activeDetailsContainer}>
+                    <div className={styles.activeDetailsContainer}>             
                         <p className={styles.episodesText}>{activeShowState.episodes} Episodes</p>
-                        <h1 className={styles.titleText}>{activeShowState.title}</h1>
+               
+                        <h1 className={styles.titleText}>   {activeShowState.title}
+                        </h1>
                     </div>
                 </div>
             </div>
