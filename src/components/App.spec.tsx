@@ -9,8 +9,6 @@ import "whatwg-fetch";
 
 
 test('shows render', async () => {
-    const history = createMemoryHistory()
-
     nock(`https://vice-json.herokuapp.com`)
       .get('/shows', 200)
       .reply(200, {

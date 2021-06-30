@@ -13,7 +13,6 @@ interface DashboardProp {
 const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
     const history = useHistory();
     const [activeShowState, setActiveCardState] = useState(currentShows[0]);
-    const [fadeDirection, setFadeDirection] = useState(true);
 
     const foundShowIndex = currentShows.findIndex((show: Show) => show === activeShowState);
     const [currentIndex, setCurrentIndex] = useState(foundShowIndex);
@@ -52,7 +51,6 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
     // matches active image to active image in slider
     useEffect(() => {
         const foundShow = currentShows.findIndex((show: Show) => show === activeShowState);
-        foundShow >= currentIndex ? setFadeDirection(false) : setFadeDirection(true);
         
         setCurrentIndex(foundShow);
     }, [activeShowState]);
@@ -73,7 +71,7 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 1 }}
+                        transition={{ duration: 0.5 }}
                     />
                 </div>
 
