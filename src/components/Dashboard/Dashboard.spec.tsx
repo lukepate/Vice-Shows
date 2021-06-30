@@ -14,17 +14,3 @@ test('The Dashboard renders', async () => {
     );
     screen.getByTestId('dashboard');
 });
-
-
-
-// test('The Dashboard renders', async () => {
-//     const history = createMemoryHistory()
-//     const { getByAltText } = render(
-//         <Router history={history}>
-//             <Dashboard currentShows={showsData} />
-//         </Router>
-//     );
-//     const dashboard = screen.getByTestId('dashboard');
-//     // __reactEventHandlers$jlojnpv5hw
-//     console.log(dashboard);
-// });
