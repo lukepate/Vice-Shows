@@ -68,9 +68,9 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
                         className={styles.activeImage} 
                         key={`https://viceimages.s3.amazonaws.com/${activeShowState.product_image_url}`}
                         src={`https://viceimages.s3.amazonaws.com/${activeShowState.product_image_url}`}
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        exit={{ scale: 0 }}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0 }}
                         transition={{ duration: 0.5 }}
                     />
                 </div>
