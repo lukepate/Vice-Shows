@@ -16,7 +16,7 @@ npm install
 To start the local environment run: 
 
 ```bash
-npm run start-dev
+npm run dev
 ```
 
 ## Contributing
