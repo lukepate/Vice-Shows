@@ -21,7 +21,6 @@ const findIndex = (activeShowState: Show | null, currentShows: Show[]) => {
 const Main: React.FC<MainProp> = ( {currentShows} ) => {
     const history = useHistory();
     const [activeShowState, setActiveCardState] = useState(currentShows[0]);
-    const [activeIndex, setActiveIndex] = useState(findIndex(activeShowState, currentShows));
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search).get('id');
@@ -40,23 +39,17 @@ const Main: React.FC<MainProp> = ( {currentShows} ) => {
         history.listen((_location, action) => {
             const urlParams = new URLSearchParams(window.location.search).get('id');
             const foundShow = findShow(urlParams, currentShows);
-
+            
             foundShow ? setActiveCardState(foundShow) : setActiveCardState(currentShows[0]);
             if (action === 'POP' && foundShow) setActiveCardState(foundShow);  
         });
     }, []);
 
-    // matches active image to active image in slider
-    useEffect(() => {
-        const foundShow = findIndex(activeShowState, currentShows);
-        setActiveIndex(foundShow);
-    }, [activeShowState]);
-
     return (
         <div data-testid='Main' className={styles.container}>
             <Nav />
             <div className={styles.containerOrder}>
-                <Slider activeIndex={activeIndex} currentShows={currentShows} />
+                <Slider activeIndex={findIndex(activeShowState, currentShows)} currentShows={currentShows} />
 
                 <Active activeShowState={activeShowState}/>
             </div>

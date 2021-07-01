@@ -21,8 +21,8 @@ const Slider: React.FC<SliderProps> = ({ currentShows, activeIndex }) => (
                                 {activeIndex === index && (
                                     <motion.div 
                                         animate={{
-                                        scale: [0, 1.2, 1],
-                                        borderRadius: ["0%", "30%", "70%", "100%"],
+                                            scale: [0, 1.2, 1],
+                                            borderRadius: ["0%", "30%", "70%", "100%"],
                                         }}
                                         className={styles.showIndex}>
                                         {++index}
