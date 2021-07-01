@@ -14,13 +14,9 @@ const findShow = (id: string | null, currentShows: Show[]) => {
     return currentShows.find((show: Show) => show.id === id);
 };
 
-const findIndex = (activeShowState: Show | null, currentShows: Show[]) => {
-    return currentShows.findIndex((show: Show) => show === activeShowState);
-};
-
 const Main: React.FC<MainProp> = ( {currentShows} ) => {
     const history = useHistory();
-    const [activeShowState, setActiveCardState] = useState(currentShows[0]);
+    const [activeShow, setActiveShow] = useState(currentShows[0]);
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search).get('id');
@@ -34,14 +30,14 @@ const Main: React.FC<MainProp> = ( {currentShows} ) => {
             window.history.replaceState({}, '', `${window.location.pathname}`);
         };
 
-        if(foundShow) setActiveCardState(foundShow);
+        if(foundShow) setActiveShow(foundShow);
 
         history.listen((_location, action) => {
             const urlParams = new URLSearchParams(window.location.search).get('id');
             const foundShow = findShow(urlParams, currentShows);
             
-            setActiveCardState(foundShow ? foundShow : currentShows[0]);
-            if (action === 'POP' && foundShow) setActiveCardState(foundShow);  
+            setActiveShow(foundShow ? foundShow : currentShows[0]);
+            if (action === 'POP' && foundShow) setActiveShow(foundShow);  
         });
     }, []);
 
@@ -49,9 +45,9 @@ const Main: React.FC<MainProp> = ( {currentShows} ) => {
         <div data-testid='Main' className={styles.container}>
             <Nav />
             <div className={styles.containerOrder}>
-                <Slider activeIndex={findIndex(activeShowState, currentShows)} currentShows={currentShows} />
+                <Slider activeShow={activeShow} currentShows={currentShows} />
 
-                <Active activeShowState={activeShowState}/>
+                <Active activeShow={activeShow}/>
             </div>
         </div>
     )

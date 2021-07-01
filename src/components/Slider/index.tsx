@@ -6,19 +6,19 @@ import { motion } from "framer-motion"
 
 interface SliderProps {
     currentShows: Show[];
-    activeIndex: number;
+    activeShow: Show;
 }
 
-const Slider: React.FC<SliderProps> = ({ currentShows, activeIndex }) => (
+const Slider: React.FC<SliderProps> = ({ currentShows, activeShow }) => (
     <div className={styles.showContainer}>
         <div className={styles.sliderContainer} data-testid='slider' >
             {currentShows.map((show: Show, index: number) => {
                 return (
                     <Link className={styles.link} key={show.id} to={`/?id=${show.id}`}  data-testid={`show-${show.id}`} >
                         <div className={styles.show}>
-                                <img key={index} alt={show.title} className={activeIndex === index ? styles.active : styles.showStyle} src={`https://viceimages.s3.amazonaws.com/${show.product_image_url}`} />
+                                <img key={index} alt={show.title} className={activeShow === show ? styles.active : styles.showStyle} src={`https://viceimages.s3.amazonaws.com/${show.product_image_url}`} />
 
-                                {activeIndex === index && (
+                                {activeShow === show && (
                                     <motion.div 
                                         animate={{
                                             scale: [0, 1.2, 1],
