@@ -23,14 +23,14 @@ const Main: React.FC<MainProp> = ( {currentShows} ) => {
         const foundShow = findShow(idParam, currentShows);
 
         // removes false query param matches from url
-        if(!foundShow) {
+        if (foundShow){
+            setActiveShow(foundShow)
+        } else {
             const url = new URL(window.location.href);
             const params = new URLSearchParams(url.search.slice(1));
             params.delete('id');
             window.history.replaceState({}, '', `${window.location.pathname}`);
         };
-
-        if(foundShow) setActiveShow(foundShow);
 
         history.listen((_location) => {
             const idParam = new URLSearchParams(window.location.search).get('id');
