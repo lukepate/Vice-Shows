@@ -2,6 +2,7 @@ import React from 'react';
 import { Show } from '../../types/show';
 import { Link } from "react-router-dom";
 import styles from './Slider.scss';
+import { motion } from "framer-motion"
 
 interface SliderProps {
     currentShows: Show[];
@@ -17,7 +18,16 @@ const Slider: React.FC<SliderProps> = ({ currentShows, activeIndex }) => (
                         <div className={styles.show}>
                                 <img key={index} alt={show.title} className={activeIndex === index ? styles.active : styles.showStyle} src={`https://viceimages.s3.amazonaws.com/${show.product_image_url}`} />
 
-                                <div className={styles.showIndex}>{++index}</div>
+                                {activeIndex === index && (
+                                    <motion.div 
+                                        animate={{
+                                        scale: [0, 1.2, 1],
+                                        borderRadius: ["0%", "30%", "70%", "100%"],
+                                        }}
+                                        className={styles.showIndex}>
+                                        {++index}
+                                    </motion.div>
+                                )}
                         </div>
                     </Link>
                 );
