@@ -2,7 +2,7 @@
 
 VICE Shows is a React/Typescript single page application capable of navigating through various shows.
 
-### A production linke [here](https://vice-shows.surge.sh/).
+### Check out the hosted version [here](https://vice-shows.surge.sh/).
 
 ## Installation
 
