@@ -40,7 +40,7 @@ const Main: React.FC<MainProp> = ( {currentShows} ) => {
             const urlParams = new URLSearchParams(window.location.search).get('id');
             const foundShow = findShow(urlParams, currentShows);
             
-            foundShow ? setActiveCardState(foundShow) : setActiveCardState(currentShows[0]);
+            setActiveCardState(foundShow ? foundShow : currentShows[0]);
             if (action === 'POP' && foundShow) setActiveCardState(foundShow);  
         });
     }, []);
