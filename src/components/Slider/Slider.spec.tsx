@@ -10,7 +10,7 @@ test('The Slider renders', async () => {
 
     render(
         <Router history={history}>
-            <Slider currentShows={showsData} updateActiveShow={jest.fn()} />
+            <Slider currentShows={showsData} activeIndex={0} />
         </Router>
     );
     screen.getByTestId('slider');

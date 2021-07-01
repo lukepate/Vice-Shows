@@ -1,4 +1,6 @@
-export const showsData = [
+import { Show } from './types/show';
+
+export const showsData: Show[] = [
     {
         "id": "a1",
         "title": "Gaycation",

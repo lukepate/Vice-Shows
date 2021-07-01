@@ -4,7 +4,6 @@ import { render, waitFor } from '@testing-library/react';
 import App from './App';
 import { showsData } from '../mockdata';
 import nock from 'nock';
-import fetch from 'node-fetch';
 import "whatwg-fetch";
 
 
