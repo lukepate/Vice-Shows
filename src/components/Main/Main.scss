@@ -1,70 +1,7 @@
 @import '../Styles/_colors.scss'; 
 
-.activeShow {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 40px;
-    height: 420px;   
-    
-    .activeImage {
-        width: auto;
-        height: 420px;     
-    }
-}
-
-.activeTextContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 0px;
-
-    .activeDetailsContainer {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .episodesText {
-            margin: 8px 0 0;
-            font-family: 'Raleway', sans-serif;
-        }
-
-        .titleText {
-            margin: 0px;
-            padding-bottom: 20px;
-        }
-    }
-}
-
 .containerOrder {
     width:100%;
     display: flex;
     flex-direction: column;
 }
-
-@media only screen and (max-width: 980px) {
-    .activeShow {
-         height: 240px;
-         
-        .activeImage {
-            height: 240px;
-            transform: translateX(0px) translateZ(0px)!important;
-        }
-    }
-    .activeTextContainer {
-        .activeDetailsContainer{
-            flex-direction: column-reverse;
-            .titleText {
-                padding-bottom: 20px;
-                font-size: 20px;
-            }
-            .episodesText {
-                padding-bottom: 0px;
-            }
-        }
-    }
-
-
-}
-
-

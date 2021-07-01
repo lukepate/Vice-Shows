@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Show } from '../../types/show';
 import { useHistory } from "react-router-dom";
 import Slider from '../Slider'; 
+import Active from '../Active'; 
 import Nav from '../Nav'; 
 import styles from './Main.scss';
-import { motion } from "framer-motion"
 
 interface MainProp {
     currentShows: Show[]
@@ -58,25 +58,7 @@ const Main: React.FC<MainProp> = ( {currentShows} ) => {
             <div className={styles.containerOrder}>
                 <Slider activeIndex={activeIndex} currentShows={currentShows} />
 
-                <div className={styles.activeShow}>
-                    <motion.img
-                        className={styles.activeImage} 
-                        key={`https://viceimages.s3.amazonaws.com/${activeShowState.product_image_url}`}
-                        src={`https://viceimages.s3.amazonaws.com/${activeShowState.product_image_url}`}
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0 }}
-                        transition={{ duration: 0.5 }}
-                    />
-                </div>
-
-                <div className={styles.activeTextContainer}>
-                    <div className={styles.activeDetailsContainer}>             
-                        <p className={styles.episodesText}>{activeShowState.episodes} Episodes</p>
-               
-                        <h1 className={styles.titleText}>{activeShowState.title}</h1>
-                    </div>
-                </div>
+                <Active activeShowState={activeShowState}/>
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Show } from '../../types/show';
 import { Link } from "react-router-dom";
 import styles from './Slider.scss';

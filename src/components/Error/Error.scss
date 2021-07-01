@@ -1,4 +1,7 @@
+@import '../Styles/_colors.scss'; 
+
 .errorContainer {
     margin-top: 280px;
     text-align: center;
+    color: $white;
 }
