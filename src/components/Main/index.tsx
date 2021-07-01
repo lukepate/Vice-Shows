@@ -19,8 +19,8 @@ const Main: React.FC<MainProp> = ( {currentShows} ) => {
     const [activeShow, setActiveShow] = useState(currentShows[0]);
 
     useEffect(() => {
-        const urlParams = new URLSearchParams(window.location.search).get('id');
-        const foundShow = findShow(urlParams, currentShows);
+        const idParam = new URLSearchParams(window.location.search).get('id');
+        const foundShow = findShow(idParam, currentShows);
 
         // removes false query param matches from url
         if(!foundShow) {
@@ -32,12 +32,11 @@ const Main: React.FC<MainProp> = ( {currentShows} ) => {
 
         if(foundShow) setActiveShow(foundShow);
 
-        history.listen((_location, action) => {
-            const urlParams = new URLSearchParams(window.location.search).get('id');
-            const foundShow = findShow(urlParams, currentShows);
+        history.listen((_location) => {
+            const idParam = new URLSearchParams(window.location.search).get('id');
+            const foundShow = findShow(idParam, currentShows);
             
-            setActiveShow(foundShow ? foundShow : currentShows[0]);
-            if (action === 'POP' && foundShow) setActiveShow(foundShow);  
+            setActiveShow(foundShow ? foundShow : currentShows[0]); 
         });
     }, []);
 

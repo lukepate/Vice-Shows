@@ -21,11 +21,11 @@ test('The Slider renders all 10 images in order by altText', async () => {
 
     const { getByAltText } = render(
         <Router history={history}>
-            <Slider currentShows={showsData} updateActiveShow={jest.fn()} /> 
+            <Slider currentShows={showsData} activeShow={showsData[0]} /> 
         </Router>
     );
     
     showsData.forEach(show => {
-        expect(getByAltText(show.title))
+        expect(getByAltText(show.title));
     });
 });

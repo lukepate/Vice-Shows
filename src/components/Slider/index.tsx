@@ -14,10 +14,13 @@ const Slider: React.FC<SliderProps> = ({ currentShows, activeShow }) => (
         <div className={styles.sliderContainer} data-testid='slider' >
             {currentShows.map((show: Show, index: number) => {
                 return (
-                    <Link className={styles.link} key={show.id} to={`/?id=${show.id}`}  data-testid={`show-${show.id}`} >
+                    <Link className={styles.link} key={index} to={`/?id=${show.id}`} data-testid
+                    ={`show-${show.id}`} >
                         <div className={styles.show}>
-                                <img key={index} alt={show.title} className={activeShow === show ? styles.active : styles.showStyle} src={`https://viceimages.s3.amazonaws.com/${show.product_image_url}`} />
-
+                                {activeShow && (
+                                    <img key={index} alt={show.title} className={activeShow.id === show.id ? styles.active : styles.showStyle} src={`https://viceimages.s3.amazonaws.com/${show.product_image_url}`} />
+                                )}
+                        
                                 {activeShow === show && (
                                     <motion.div 
                                         animate={{
