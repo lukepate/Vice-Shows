@@ -21,7 +21,7 @@ const Slider: React.FC<SliderProps> = ({ currentShows, activeShow }) => (
                                     <img key={index} alt={show.title} className={activeShow.id === show.id ? styles.active : styles.showStyle} src={`https://viceimages.s3.amazonaws.com/${show.product_image_url}`} />
                                 )}
                         
-                                {activeShow === show && (
+                                {activeShow && activeShow.id === show.id && (
                                     <motion.div 
                                         animate={{
                                             scale: [0, 1.2, 1],
