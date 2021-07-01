@@ -41,7 +41,7 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
             const urlParams = new URLSearchParams(window.location.search).get('id');
             const foundShow = findShow(urlParams, currentShows);
 
-            if (foundShow) setActiveCardState(foundShow);
+            foundShow ? setActiveCardState(foundShow) : setActiveCardState(currentShows[0]);
             if (action === 'POP' && foundShow) setActiveCardState(foundShow);  
         });
     }, []);
