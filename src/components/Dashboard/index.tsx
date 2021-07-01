@@ -10,38 +10,36 @@ interface DashboardProp {
     currentShows: Show[]
 }
 
+const findShow = (id: string | null, currentShows: Show[]) => {
+    return currentShows.find((show: Show) => show.id === id);
+};
+
+const findIndex = (activeShowState: Show | null, currentShows: Show[]) => {
+    return currentShows.findIndex((show: Show) => show === activeShowState);
+};
+
 const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
     const history = useHistory();
-
-    const findShow = (id: string | null) => {
-        return currentShows.find((show: Show) => show.id === id);
-    };
-
-    const findIndex = (activeShowState: Show | null) => {
-        return currentShows.findIndex((show: Show) => show === activeShowState);
-    };
-
     const [activeShowState, setActiveCardState] = useState(currentShows[0]);
-    const [activeIndex, setActiveIndex] = useState(findIndex(activeShowState));
-
+    const [activeIndex, setActiveIndex] = useState(findIndex(activeShowState, currentShows));
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search).get('id');
-        const foundShow = findShow(urlParams);
+        const foundShow = findShow(urlParams, currentShows);
 
-        // removes false query params
+        // removes false query param matches from url
         if(!foundShow) {
-            const url = new URL(window.location.href)
-            const params = new URLSearchParams(url.search.slice(1))
-            params.delete('id')
-            window.history.replaceState({}, '', `${window.location.pathname}`)
+            const url = new URL(window.location.href);
+            const params = new URLSearchParams(url.search.slice(1));
+            params.delete('id');
+            window.history.replaceState({}, '', `${window.location.pathname}`);
         };
 
         if(foundShow) setActiveCardState(foundShow);
 
         history.listen((_location, action) => {
             const urlParams = new URLSearchParams(window.location.search).get('id');
-            const foundShow = findShow(urlParams);
+            const foundShow = findShow(urlParams, currentShows);
 
             if (foundShow) setActiveCardState(foundShow);
             if (action === 'POP' && foundShow) setActiveCardState(foundShow);  
@@ -50,7 +48,7 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
 
     // matches active image to active image in slider
     useEffect(() => {
-        const foundShow = findIndex(activeShowState);
+        const foundShow = findIndex(activeShowState, currentShows);
         setActiveIndex(foundShow);
     }, [activeShowState]);
 
@@ -76,8 +74,7 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
                     <div className={styles.activeDetailsContainer}>             
                         <p className={styles.episodesText}>{activeShowState.episodes} Episodes</p>
                
-                        <h1 className={styles.titleText}>   {activeShowState.title}
-                        </h1>
+                        <h1 className={styles.titleText}>{activeShowState.title}</h1>
                     </div>
                 </div>
             </div>
