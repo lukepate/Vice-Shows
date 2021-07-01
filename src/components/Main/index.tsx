@@ -3,10 +3,10 @@ import { Show } from '../../types/show';
 import { useHistory } from "react-router-dom";
 import Slider from '../Slider'; 
 import Nav from '../Nav'; 
-import styles from './Dashboard.scss';
+import styles from './Main.scss';
 import { motion } from "framer-motion"
 
-interface DashboardProp {
+interface MainProp {
     currentShows: Show[]
 }
 
@@ -18,7 +18,7 @@ const findIndex = (activeShowState: Show | null, currentShows: Show[]) => {
     return currentShows.findIndex((show: Show) => show === activeShowState);
 };
 
-const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
+const Main: React.FC<MainProp> = ( {currentShows} ) => {
     const history = useHistory();
     const [activeShowState, setActiveCardState] = useState(currentShows[0]);
     const [activeIndex, setActiveIndex] = useState(findIndex(activeShowState, currentShows));
@@ -53,7 +53,7 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
     }, [activeShowState]);
 
     return (
-        <div data-testid='dashboard' className={styles.container}>
+        <div data-testid='Main' className={styles.container}>
             <Nav />
             <div className={styles.containerOrder}>
                 <Slider activeIndex={activeIndex} currentShows={currentShows} />
@@ -83,4 +83,4 @@ const Dashboard: React.FC<DashboardProp> = ( {currentShows} ) => {
 };
 
 
-export default Dashboard;
+export default Main;

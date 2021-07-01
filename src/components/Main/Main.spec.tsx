@@ -1,25 +1,25 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import Dashboard from './index';
+import Main from './index';
 import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
-import { showsData } from '../../mockdata';
+import { showsData } from '../../mockData';
 
-test('The Dashboard renders', async () => {
+test('The Main renders', async () => {
     const history = createMemoryHistory();
    render(
         <Router history={history}>
-            <Dashboard currentShows={showsData} />
+            <Main currentShows={showsData} />
         </Router>
     );
-    screen.getByTestId('dashboard');
+    screen.getByTestId('Main');
 });
 
 test('should render first show in list', async () => {
     const history = createMemoryHistory();
     const { debug } = render(
         <Router history={history}>
-            <Dashboard currentShows={showsData} />
+            <Main currentShows={showsData} />
         </Router>
     );
 

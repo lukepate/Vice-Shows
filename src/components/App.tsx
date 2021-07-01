@@ -1,9 +1,8 @@
 import React from 'react';
-import Dashboard from './Dashboard'
+import Main from './Main'
 import useFetch from "react-fetch-hook";
 import styles from './styles/App.scss';
 import { Show } from '../types/show';
-import Logo from './Nav/ViceLogo';
 import Error from './Error';
 import Loading from './Loading';
 
@@ -18,7 +17,7 @@ function App() {
     return (
         <div className={styles.container}>
             {data && (
-                <Dashboard currentShows={data} />
+                <Main currentShows={data} />
             )}
         </div>
     );
